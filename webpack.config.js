@@ -11,6 +11,12 @@ const  config = {
          filename:'[name].js',
          path: __dirname + '/build'
      },
+     devServer :{
+        contentBase:__dirname +"/build",
+        index:"./index.html",
+        compress:true,
+        port:9090
+    },
     module:{
         rules:[
             {
@@ -56,18 +62,13 @@ const  config = {
     },
     plugins:[
         new HtmlWebPackPlugin({
-            template:'./src/index.html'
+            template:'./public/index.html'
         })
     ]
 }
 
 
-module.exports = (env,{mode})=>{
-    config.devServer = {
-        contentBase:__dirname +"/build",
-        index:"./src/index.html",
-        compress:true,
-        port:9090
-    }
-    return config;
-}
+// module.exports = (env,{mode})=>{
+//     config.
+//     return config;
+// }
