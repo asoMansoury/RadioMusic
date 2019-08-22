@@ -15,7 +15,6 @@ class App extends Component{
     }
 
     componentDidMount () {
-        this.props.setTrue();
         // if(this.props.isLogin===false){
         //     this.loadScripts("./assets/app-assets/js/core/libraries/jquery.min.js");
         //     this.loadScripts("./assets/app-assets/vendors/js/ui/tether.min.js");

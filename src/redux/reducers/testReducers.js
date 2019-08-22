@@ -1,10 +1,10 @@
-export const test = (state=[],action)=>{
-    console.log(action);
+export const test = (state=0,action)=>{
     switch (action.type) {
         case 'TEST':
-            return true;
+            
+            return state;
     
         default:
-            return false;
+            return state;
     }
 }
