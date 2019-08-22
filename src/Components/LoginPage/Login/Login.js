@@ -1,8 +1,11 @@
 import React,{Component} from 'react';
-import './linkCssStyles';
+import './../linkCssStyles';
 import LoginFormInput from './LoginFormInput';
-import CardTitle from './CardTitle';
-import CardFooter from './CardFooter';
+import RecoverPassword from './../RecoverPasswordPage/RecoverPassword';
+import CardTitle from '../CardTitle';
+import CardFooter from '../CardFooter';
+import {Route,Switch} from 'react-router-dom';
+import SignUpPage from './../SignUpPage/SignUp';
 
 class Login extends Component{
     constructor(props){
@@ -30,8 +33,16 @@ class Login extends Component{
                         <section className="flexbox-container">
                             <div className="col-md-4 offset-md-4 col-xs-10 offset-xs-1  box-shadow-2 p-0">
                             <div className="card border-grey border-lighten-3 m-0">
+                            
                                     <CardTitle></CardTitle>
-                                    <LoginFormInput></LoginFormInput>
+                                    <div className="routeContainer">
+                                        <Switch>
+                                            <Route path="/" exact={true} component={LoginFormInput}></Route>
+                                            <Route path="/Recover"  component={RecoverPassword}></Route>
+                                            <Route path="/SignUP"  component={SignUpPage}></Route>
+                                        </Switch>
+                                    </div>
+                                    
                                     <CardFooter></CardFooter>
                                 </div>
                             </div>

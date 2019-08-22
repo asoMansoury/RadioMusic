@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import Index from './IndexComponents/index';
-import Login from './LoginPage/Login';
+import Authentication from './LoginPage/Authentication';
 export default class App extends Component{
     constructor(props){
         super(props);
@@ -14,7 +14,7 @@ export default class App extends Component{
             )
         }else{
             return(
-                <Login></Login>
+                <Authentication></Authentication>
             )
         }
 
