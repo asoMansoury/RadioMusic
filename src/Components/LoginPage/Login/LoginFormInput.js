@@ -1,6 +1,26 @@
 import React ,{Component} from 'react';
-
+import {Link} from 'react-router-dom';
+import axios from 'axios';
 export default class LoginFormInput extends Component{
+    constructor(props){
+        super(props);
+    }
+
+    async  Login(){
+        axios.post('http://localhost:53094/api/userapi/Login',{
+            nationalCode: "2860122281",
+            password: "123456"
+        },
+        {
+            headers: { 
+                "Accept": "application/json " ,
+                 "Content-Type":"application/json"}
+        }).then(function (response){
+            console.log(response);
+        }).catch(function(error){
+            console.log(error);
+        })
+    }
     render(){
         return(
             <div className="card-body collapse in">
@@ -26,10 +46,10 @@ export default class LoginFormInput extends Component{
                                 </fieldset>
                             </div>
                             <div className="col-md-6 col-xs-12 text-xs-center text-md-right">
-                                <a href="recover-password.html" className="card-link">Forgot Password?</a>
+                                <Link to="/Recover" className="card-link">Forgot Password?</Link>
                             </div>
                         </fieldset>
-                        <button type="submit" className="btn btn-primary btn-lg btn-block">
+                        <button type="button" className="btn btn-primary btn-lg btn-block" onClick={this.Login}>
                             <i className="icon-unlock2"></i> Login
                         </button>
                     </form>
