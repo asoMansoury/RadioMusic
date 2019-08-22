@@ -1,11 +1,14 @@
+var webpack = require('webpack');
 const miniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 
+
 const  config = {
     entry:{
-        index:'./src/index.js'
+        index:'./src/index.js',
+        login:'./src/login.js'
     },
     output:{
          filename:'[name].js',
@@ -67,6 +70,7 @@ const  config = {
     ]
 }
 
+webpack(config);
 
 // module.exports = (env,{mode})=>{
 //     config.

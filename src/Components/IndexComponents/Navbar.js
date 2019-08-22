@@ -1,16 +1,23 @@
 import React ,{Component} from 'react';
+import {Link} from 'react-router-dom';
 import * as urlLight from './../../assets/app-assets/images/logo/robust-logo-light.png' ;
+import * as urlSmall from './../../assets/app-assets/images/logo/robust-logo-small.png' ;
 import * as avatarUrl from './../../assets/app-assets/images/portrait/small/avatar-s-1.png';
 import * as avatarUrl2 from './../../assets/app-assets/images/portrait/small/avatar-s-2.png';
 import * as avatarUrl6 from './../../assets/app-assets/images/portrait/small/avatar-s-6.png';
 
 class NavBar extends Component{
+	constructor(props){
+		super(props);
+		this.clicked = false;
+		
+	}
     render(){
         return(
                 
 <nav className="header-navbar navbar navbar-with-menu navbar-fixed-top navbar-semi-dark navbar-shadow">
 	<div className="navbar-wrapper">
-		<div className="navbar-header" style={{width:252}}>
+		<div className="navbar-header">
 			<ul className="nav navbar-nav">
 				<li className="nav-item mobile-menu hidden-md-up float-xs-left">
 					<a className="nav-link nav-menu-main menu-toggle hidden-xs">
@@ -18,9 +25,12 @@ class NavBar extends Component{
 					</a>
 				</li>
 				<li className="nav-item">
-					<a href="index.html" className="navbar-brand nav-link">
-						<img alt="branding logo" src={urlLight} data-expand={urlLight} data-collapse="../../app-assets/images/logo/robust-logo-small.png" className="brand-logo"></img>
-						</a>
+					<Link to="index.html" className="navbar-brand nav-link">
+						<img id="imgLogo" alt="branding logo"  src="./../../assets/app-assets/images/logo/robust-logo-light.png"
+						 data-expand="./../../assets/app-assets/images/logo/robust-logo-light.png" 
+						 data-collapse="./../../assets/app-assets/images/logo/robust-logo-small.png" 
+						 className="brand-logo"></img>
+						</Link>
 					</li>
 					<li className="nav-item hidden-md-up float-xs-right">
 						<a data-toggle="collapse" data-target="#navbar-mobile" className="nav-link open-navbar-container">
@@ -34,16 +44,24 @@ class NavBar extends Component{
 					<ul className="nav navbar-nav">
 						<li className="nav-item hidden-sm-down">
 							<a className="nav-link nav-menu-main menu-toggle hidden-xs">
-								<i className="icon-menu5"></i>
+								<i className="icon-menu5" onClick={()=>
+								{
+									var img = document.getElementById("imgLogo");
+									if(this.clicked===true)
+										img.src = "./../../assets/app-assets/images/logo/robust-logo-light.png";
+									else
+										img.src = "./../../assets/app-assets/images/logo/robust-logo-small.png";
+									this.clicked = !this.clicked;
+								}}></i>
 							</a>
 						</li>
 						<li className="nav-item hidden-sm-down">
-							<a href="#" className="nav-link nav-link-expand">
+							<Link to="#" className="nav-link nav-link-expand">
 								<i className="ficon icon-expand2"></i>
-							</a>
+							</Link>
 						</li>
 						<li className="nav-item hidden-sm-down">
-							<a href="https://pixinvent.com/bootstrap-admin-template/robust/" target="_blank" className="btn btn-success upgrade-to-pro">Upgrade to PRO $24</a>
+							<Link to="https://pixinvent.com/bootstrap-admin-template/robust/" target="_blank" className="btn btn-success upgrade-to-pro">Upgrade to PRO $24</Link>
 						</li>
 					</ul>
 					<ul className="nav navbar-nav float-xs-right">
@@ -53,25 +71,25 @@ class NavBar extends Component{
 								<span className="selected-language">English</span>
 							</a>
 							<div aria-labelledby="dropdown-flag" className="dropdown-menu">
-								<a href="#" className="dropdown-item">
+								<Link to="#" className="dropdown-item">
 									<i className="flag-icon flag-icon-gb"></i> English
-								</a>
-								<a href="#" className="dropdown-item">
+								</Link>
+								<Link to="#" className="dropdown-item">
 									<i className="flag-icon flag-icon-fr"></i> French
-								</a>
-								<a href="#" className="dropdown-item">
+								</Link>
+								<Link to="#" className="dropdown-item">
 									<i className="flag-icon flag-icon-cn"></i> Chinese
-								</a>
-								<a href="#" className="dropdown-item">
+								</Link>
+								<Link to="#" className="dropdown-item">
 									<i className="flag-icon flag-icon-de"></i> German
-								</a>
+								</Link>
 							</div>
 						</li>
 						<li className="dropdown dropdown-notification nav-item">
-							<a href="#" data-toggle="dropdown" className="nav-link nav-link-label">
+							<Link to="#" data-toggle="dropdown" className="nav-link nav-link-label">
 								<i className="ficon icon-bell4"></i>
 								<span className="tag tag-pill tag-default tag-danger tag-default tag-up">5</span>
-							</a>
+							</Link>
 							<ul className="dropdown-menu dropdown-menu-media dropdown-menu-right">
 								<li className="dropdown-menu-header">
 									<h6 className="dropdown-header m-0">
@@ -80,7 +98,7 @@ class NavBar extends Component{
 									</h6>
 								</li>
 								<li className="list-group scrollable-container">
-									<a href="javascript:void(0)" className="list-group-item">
+									<Link to="javascript:void(0)" className="list-group-item">
 										<div className="media">
 											<div className="media-left valign-middle">
 												<i className="icon-cart3 icon-bg-circle bg-cyan"></i>
@@ -93,8 +111,8 @@ class NavBar extends Component{
 												</small>
 											</div>
 										</div>
-									</a>
-									<a href="javascript:void(0)" className="list-group-item">
+									</Link>
+									<Link to="javascript:void(0)" className="list-group-item">
 										<div className="media">
 											<div className="media-left valign-middle">
 												<i className="icon-monitor3 icon-bg-circle bg-red bg-darken-1"></i>
@@ -107,8 +125,8 @@ class NavBar extends Component{
 												</small>
 											</div>
 										</div>
-									</a>
-									<a href="javascript:void(0)" className="list-group-item">
+									</Link>
+									<Link to="javascript:void(0)" className="list-group-item">
 										<div className="media">
 											<div className="media-left valign-middle">
 												<i className="icon-server2 icon-bg-circle bg-yellow bg-darken-3"></i>
@@ -121,8 +139,8 @@ class NavBar extends Component{
 												</small>
 											</div>
 										</div>
-									</a>
-									<a href="javascript:void(0)" className="list-group-item">
+									</Link>
+									<Link to="javascript:void(0)" className="list-group-item">
 										<div className="media">
 											<div className="media-left valign-middle">
 												<i className="icon-check2 icon-bg-circle bg-green bg-accent-3"></i>
@@ -134,8 +152,8 @@ class NavBar extends Component{
 												</small>
 											</div>
 										</div>
-									</a>
-									<a href="javascript:void(0)" className="list-group-item">
+									</Link>
+									<Link to="javascript:void(0)" className="list-group-item">
 										<div className="media">
 											<div className="media-left valign-middle">
 												<i className="icon-bar-graph-2 icon-bg-circle bg-teal"></i>
@@ -147,18 +165,18 @@ class NavBar extends Component{
 												</small>
 											</div>
 										</div>
-									</a>
+									</Link>
 								</li>
 								<li className="dropdown-menu-footer">
-									<a href="javascript:void(0)" className="dropdown-item text-muted text-xs-center">Read all notifications</a>
+									<Link to="javascript:void(0)" className="dropdown-item text-muted text-xs-center">Read all notifications</Link>
 								</li>
 							</ul>
 						</li>
 						<li className="dropdown dropdown-notification nav-item">
-							<a href="#" data-toggle="dropdown" className="nav-link nav-link-label">
+							<Link to="#" data-toggle="dropdown" className="nav-link nav-link-label">
 								<i className="ficon icon-mail6"></i>
 								<span className="tag tag-pill tag-default tag-info tag-default tag-up">8</span>
-							</a>
+							</Link>
 							<ul className="dropdown-menu dropdown-menu-media dropdown-menu-right">
 								<li className="dropdown-menu-header">
 									<h6 className="dropdown-header m-0">
@@ -167,7 +185,7 @@ class NavBar extends Component{
 									</h6>
 								</li>
 								<li className="list-group scrollable-container">
-									<a href="javascript:void(0)" className="list-group-item">
+									<Link to="javascript:void(0)" className="list-group-item">
 										<div className="media">
 											<div className="media-left">
 												<span className="avatar avatar-sm avatar-online rounded-circle">
@@ -183,8 +201,8 @@ class NavBar extends Component{
 													</small>
 												</div>
 											</div>
-										</a>
-										<a href="javascript:void(0)" className="list-group-item">
+										</Link>
+										<Link to="javascript:void(0)" className="list-group-item">
 											<div className="media">
 												<div className="media-left">
 													<span className="avatar avatar-sm avatar-busy rounded-circle">
@@ -200,8 +218,8 @@ class NavBar extends Component{
 														</small>
 													</div>
 												</div>
-											</a>
-											<a href="javascript:void(0)" className="list-group-item">
+											</Link>
+											<Link to="javascript:void(0)" className="list-group-item">
 												<div className="media">
 													<div className="media-left">
 														<span className="avatar avatar-sm avatar-online rounded-circle">
@@ -217,8 +235,8 @@ class NavBar extends Component{
 															</small>
 														</div>
 													</div>
-												</a>
-												<a href="javascript:void(0)" className="list-group-item">
+												</Link>
+												<Link to="javascript:void(0)" className="list-group-item">
 													<div className="media">
 														<div className="media-left">
 															<span className="avatar avatar-sm avatar-away rounded-circle">
@@ -234,38 +252,38 @@ class NavBar extends Component{
 																</small>
 															</div>
 														</div>
-													</a>
+													</Link>
 												</li>
 												<li className="dropdown-menu-footer">
-													<a href="javascript:void(0)" className="dropdown-item text-muted text-xs-center">Read all messages</a>
+													<Link to="javascript:void(0)" className="dropdown-item text-muted text-xs-center">Read all messages</Link>
 												</li>
 											</ul>
 										</li>
 										<li className="dropdown dropdown-user nav-item">
-											<a href="#" data-toggle="dropdown" className="dropdown-toggle nav-link dropdown-user-link">
+											<Link to="#" data-toggle="dropdown" className="dropdown-toggle nav-link dropdown-user-link">
 												<span className="avatar avatar-online">
 													<img src={avatarUrl} alt="avatar"></img>
 														<i></i>
 													</span>
 													<span className="user-name">John Doe</span>
-												</a>
+												</Link>
 												<div className="dropdown-menu dropdown-menu-right">
-													<a href="#" className="dropdown-item">
+													<Link to="#" className="dropdown-item">
 														<i className="icon-head"></i> Edit Profile
-													</a>
-													<a href="#" className="dropdown-item">
+													</Link>
+													<Link to="#" className="dropdown-item">
 														<i className="icon-mail6"></i> My Inbox
-													</a>
-													<a href="#" className="dropdown-item">
+													</Link>
+													<Link to="#" className="dropdown-item">
 														<i className="icon-clipboard2"></i> Task
-													</a>
-													<a href="#" className="dropdown-item">
+													</Link>
+													<Link to="#" className="dropdown-item">
 														<i className="icon-calendar5"></i> Calender
-													</a>
+													</Link>
 													<div className="dropdown-divider"></div>
-													<a href="#" className="dropdown-item">
+													<Link to="#" className="dropdown-item">
 														<i className="icon-power3"></i> Logout
-													</a>
+													</Link>
 												</div>
 											</li>
 										</ul>
