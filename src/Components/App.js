@@ -5,9 +5,9 @@ import SideBar from './IndexComponents/SideBar';
 import ContentIndexPage from './IndexComponents/ContentIndexPage';
 import {Route,Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {} from './../redux/reducers/testReducers';
-
+import {testAction} from './../redux/actions/actionTypes';
 import Login from './Login';
+import { dispatch } from 'C:/Users/asoPC/AppData/Local/Microsoft/TypeScript/3.5/node_modules/rxjs/internal/observable/range';
 class App extends Component{
     constructor(props){
         super(props);
@@ -15,6 +15,7 @@ class App extends Component{
     }
 
     componentDidMount () {
+        this.props.setTrue();
         // if(this.props.isLogin===false){
         //     this.loadScripts("./assets/app-assets/js/core/libraries/jquery.min.js");
         //     this.loadScripts("./assets/app-assets/vendors/js/ui/tether.min.js");
@@ -41,7 +42,6 @@ class App extends Component{
         var bodyTag =  document.getElementById("bodyApp");
         // bodyTag.appendChild(script);
        document.body.appendChild(script);
-
         // document.body.appendChild(script);
     }
 
@@ -69,10 +69,17 @@ class App extends Component{
 }
 
 const mapStateToProps = state =>{
-    console.log(state);
     return {
         data:state.test
     }
 }
-export default connect(mapStateToProps)(App);
+
+const mapDispatchToProps = dispatch =>{
+    return {
+        setTrue:()=>{
+            dispatch(testAction())
+        }
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(App);
 

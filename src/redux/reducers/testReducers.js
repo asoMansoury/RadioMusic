@@ -1,7 +1,7 @@
 export const test = (state=[],action)=>{
+    console.log(action);
     switch (action.type) {
         case 'TEST':
-            console.log("hello");
             return true;
     
         default:
