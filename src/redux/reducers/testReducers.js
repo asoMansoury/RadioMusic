@@ -1,8 +1,14 @@
-export const test = (state=0,action)=>{
+
+const initState = {
+    test:10
+}
+export const test = (state=initState,action)=>{
     switch (action.type) {
         case 'TEST':
-            
-            return state;
+            console.log("Payload : ",action.payload);
+            return {
+                test:action.payload
+            }
     
         default:
             return state;

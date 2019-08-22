@@ -32,6 +32,10 @@ class App extends Component{
         // }  else{
         //     console.log(this.props.isLogin);
         // }
+
+                // console.log("dispatch : ",this.props.dispatch({
+        //     type:"TEST"
+        // }));
     }
 
     loadScripts(url){
@@ -49,7 +53,11 @@ class App extends Component{
     render(){
         return(
             <div>
-                <NavBar></NavBar>
+                <button value="clickME" style={{width:"100%",height:150}} onClick={()=>{
+                           this.props.setTrue();
+                           console.log("data",this.props);
+                }}></button>
+                <NavBar ></NavBar>
                 <div className="routeContainer">
                     <Switch>
                         <Route path="/" exact={true} component={ContentIndexPage}></Route>
@@ -67,9 +75,11 @@ class App extends Component{
     }
 }
 
-const mapStateToProps = state =>{
+const mapStateToProps = (state) =>{
+    let value = state.test.test;
+    console.log("State : ",value);
     return {
-        data:state.test
+        data:value+1
     }
 }
 
