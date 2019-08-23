@@ -1,42 +1,24 @@
 import React ,{Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
-export default class LoginFormInput extends Component{
+import {connect} from 'react-redux';
+import {validationAction} from './../../../redux/actions/actionTypes';
+
+class LoginFormInput extends Component{
     constructor(props){
         super(props);
         this.state ={
-            nationalCode:'',
-            password:'',
-            errors:{},
-            errorMsg:'',
-            isValidForm:false
+            errorMsg:''
         }
     }
 
     handleChange = (e)=>{
-        let targetID = e.target.id.toString();
-        let targetValue = e.target.value.toString();
-        this.handleValidation(targetID,targetValue);
-        this.setState({
-            [e.target.id]:e.target.value
-        });
-    }
-
-    handleValidation(nameInput,valueInput){
-        let errors = {};
-        if(valueInput==="")
-            errors[nameInput] = "Cannot be empty"
-        else
-            errors[nameInput] = "";
-
-        this.setState({
-            errors:errors,
-            errorMsg:''
-        });
+        this.props.handleValidationFunc(e.target);
+        
     }
 
       Login(){
-        if(this.state.nationalCode===""|| this.state.password===""){
+        if(this.props.data.nationalCode===""|| this.props.data.password===""){
             this.setState({
                 errorMsg:'Username & Password is required'
             });
@@ -65,18 +47,18 @@ export default class LoginFormInput extends Component{
                 <div className="card-block">
                     <form className="form-horizontal form-simple" action="index.html" novalidate>
                         <fieldset className="form-group position-relative has-icon-left mb-0">
-                            <input type="text" value={this.state.nationalCode} onChange={e=>this.handleChange(e)} className="form-control form-control-lg input-lg" id="nationalCode" placeholder="Your Username" ></input>
+                            <input type="text" value={this.props.nationalCode} onChange={e=>this.handleChange(e)} className="form-control form-control-lg input-lg" id="nationalCode" placeholder="Your Username" ></input>
                             <div className="form-control-position">
                                 <i className="icon-head"></i>
                             </div>
-                            <span style={{color: "red"}}>{this.state.errors["nationalCode"]}</span>
+                            <span style={{color: "red"}}>{this.props.data.errors["nationalCode"]}</span>
                         </fieldset>
                         <fieldset className="form-group position-relative has-icon-left">
-                            <input type="password" value={this.state.password} onChange={e=>this.handleChange(e)} className="form-control form-control-lg input-lg" id="password" placeholder="Enter Password"></input>
+                            <input type="password" value={this.props.password} onChange={e=>this.handleChange(e)} className="form-control form-control-lg input-lg" id="password" placeholder="Enter Password"></input>
                                 <div className="form-control-position">
                                     <i className="icon-key3"></i>
                                 </div>
-                                <span style={{color: "red"}}>{this.state.errors["password"]}</span>
+                                <span style={{color: "red"}}>{this.props.data.errors["password"]}</span>
                         </fieldset>
                         <fieldset className="form-group row">
                             <div className="col-md-6 col-xs-12 text-xs-center text-md-left">
@@ -99,4 +81,19 @@ export default class LoginFormInput extends Component{
         )
     }
 }
+
+const mapStateToProps = (state) =>{
+    return {
+        data:state.vlaidationReducer
+    }
+}
+
+const mapDispatchToProps = dispatch =>{
+    return {
+        handleValidationFunc:(Target)=>{
+            dispatch(validationAction(Target))
+        }
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(LoginFormInput);
 

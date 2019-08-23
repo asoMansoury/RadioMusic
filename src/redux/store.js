@@ -8,12 +8,13 @@ import {createLogger} from 'redux-logger';
 
 const persistConfig = {
     key:'root',
-    storage
+    storage,
+    blacklist: ['vlaidationReducer']
 }
 
 const persistReducerConfig = persistReducer(persistConfig,rootReducer);
 const middlware =[thunk];
-middlware.push(createLogger());
+// middlware.push(createLogger());
 export const store = createStore(
     persistReducerConfig,
     undefined,
