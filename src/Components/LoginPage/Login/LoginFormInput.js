@@ -14,6 +14,13 @@ class LoginFormInput extends Component{
         }
     }
 
+    componentDidMount(){
+        console.log(this.props);
+        if(this.props.userStatus.isLogin===true){
+            this.props.history.push("/")
+        }
+    }
+
     handleChange = (e)=>{
         this.props.handleValidationFunc(e.target);
         
@@ -100,7 +107,6 @@ class LoginFormInput extends Component{
 }
 
 const mapStateToProps = (state) =>{
-    console.log(state);
     return {
         data:state.validationReducer,
         userStatus:state.UserIsLogin

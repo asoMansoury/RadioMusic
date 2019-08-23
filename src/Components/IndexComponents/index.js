@@ -16,7 +16,9 @@ class Index extends Component{
 
     componentDidMount () {
         this.loadScripts();
-        console.log("User Status : ",this.props.userStatus)
+        if(this.props.userStatus.isLogin===false){
+            this.props.history.push(LoginPath);
+        }
         // if(this.props.isLogin===false){
         //     this.loadScripts("./assets/app-assets/js/core/libraries/jquery.min.js");
         //     this.loadScripts("./assets/app-assets/vendors/js/ui/tether.min.js");

@@ -7,7 +7,8 @@ import CardFooter from '../CardFooter';
 import {Route,Switch,BrowserRouter} from 'react-router-dom';
 import SignUpPage from './../SignUpPage/SignUp';
 import {LoginFormInputPath,RecoverFormInputPath,SignUpFormInputPath, LoginPath, IndexPath} from './../../constFile/pathRouteNames';
-import Index from './../../IndexComponents/index';
+import {connect} from 'react-redux';
+
 class Login extends Component{
     constructor(props){
         super(props);
@@ -37,7 +38,7 @@ class Login extends Component{
                                     <div className="card border-grey border-lighten-3 m-0">
                                             <CardTitle></CardTitle>
                                             <div className="routeContainer">
-                                                <Route path={LoginPath} exact={true}  component={LoginFormInput}></Route>
+                                                <Route path={LoginPath} exact={true}  component={LoginFormInput} auth={true}></Route>
                                                 <Route path={RecoverFormInputPath}  component={RecoverPassword}></Route>
                                                 <Route path={SignUpFormInputPath}  component={SignUpPage}></Route>
                                             </div>                                    
@@ -54,4 +55,5 @@ class Login extends Component{
     }
 }
 
-export default Login;
+
+export default (Login);

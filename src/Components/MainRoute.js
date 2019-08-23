@@ -17,7 +17,8 @@ export default class MainRoute extends Component{
                     ?<Component {...props}></Component>
                     :<Redirect to={{pathname:{LoginPath}}}></Redirect>}  ></Route> */}
                     <Switch>
-                        <Route path={IndexPath} exact={true}  component={Index}></Route>
+                        <Route path={IndexPath} exact={true}  component={Index}>
+                        </Route>
                         <Login></Login>
                     </Switch>
                     
