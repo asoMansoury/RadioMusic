@@ -1,8 +1,11 @@
 import {combineReducers} from 'redux';
 import {test} from './testReducers';
-import {vlaidationReducer} from './validationReducer';
+import {validationReducer} from './validationReducer';
+import {UserIsLogin} from './UserReducers';
 
 export default combineReducers({
     test,
-    vlaidationReducer
+    validationReducer,
+    UserIsLogin:UserIsLogin
+
 })

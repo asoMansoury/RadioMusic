@@ -2,7 +2,7 @@ import React ,{Component} from 'react';
 import {Link,Redirect} from 'react-router-dom';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {validationAction} from './../../../redux/actions/actionTypes';
+import {validationAction,userLogin} from './../../../redux/actions/actionTypes';
 import {RecoverFormInputPath} from './../../constFile/pathRouteNames';
 import {IndexPath} from './../../constFile/pathRouteNames';
 
@@ -40,12 +40,15 @@ class LoginFormInput extends Component{
                             errorMsg:data.Errors.Message
                         })
                     }else{
+                        this.props.setUserLoginFunc(true,data);
                         this.props.history.push("/")
+                        // return <Redirect push={true} to="/"></Redirect>
                     }
                 }else{
                     
                 }
             } catch (error) {
+                console.log(error);
                 this.setState({
                             errorMsg:"Server Is Down!"
                 })
@@ -97,8 +100,10 @@ class LoginFormInput extends Component{
 }
 
 const mapStateToProps = (state) =>{
+    console.log(state);
     return {
-        data:state.vlaidationReducer
+        data:state.validationReducer,
+        userStatus:state.UserIsLogin
     }
 }
 
@@ -106,6 +111,9 @@ const mapDispatchToProps = dispatch =>{
     return {
         handleValidationFunc:(Target)=>{
             dispatch(validationAction(Target))
+        },
+        setUserLoginFunc:(isLogin,userInformation)=>{
+            dispatch(userLogin(isLogin,userInformation))
         }
     }
 }

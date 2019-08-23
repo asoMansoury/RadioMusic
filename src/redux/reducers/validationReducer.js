@@ -11,7 +11,7 @@ let initValue ={
     errorMsg:'',
     isValidForm:false
 }
-export const vlaidationReducer =(state=initValue, action)=>{
+export const validationReducer =(state=initValue, action)=>{
 
     switch (action.type) {
         case Validation:

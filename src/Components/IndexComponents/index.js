@@ -16,6 +16,7 @@ class Index extends Component{
 
     componentDidMount () {
         this.loadScripts();
+        console.log("User Status : ",this.props.userStatus)
         // if(this.props.isLogin===false){
         //     this.loadScripts("./assets/app-assets/js/core/libraries/jquery.min.js");
         //     this.loadScripts("./assets/app-assets/vendors/js/ui/tether.min.js");
@@ -76,18 +77,9 @@ class Index extends Component{
 }
 
 const mapStateToProps = (state) =>{
-    let value = state.test.test;
     return {
-        data:value+1
+        userStatus:state.UserIsLogin
     }
 }
 
-const mapDispatchToProps = dispatch =>{
-    return {
-        setTrue:()=>{
-            dispatch(testAction())
-        }
-    }
-}
-export default connect(mapStateToProps,mapDispatchToProps)(Index);
-
+export default connect(mapStateToProps,null)(Index);
