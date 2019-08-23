@@ -5,7 +5,7 @@ import SideBar from './SideBar';
 import ContentIndexPage from './ContentIndexPage';
 import {Route,Switch,Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {LoginPath} from './../constFile/pathRouteNames';
+import {LoginPath,ContentPagePath} from './../constFile/pathRouteNames';
 import {testAction} from './../../redux/actions/actionTypes';
 
 class Index extends Component{
@@ -46,7 +46,10 @@ class Index extends Component{
     //     var bodyTag =  document.getElementById("bodyApp");
     //     // bodyTag.appendChild(script);
     //    document.body.appendChild(script);
-       document.body.setAttribute("class","pace-done menu-collapsed fixed-navbar vertical-menu 2-columns vertical-layout");
+        document.body.removeAttribute("data-open");
+        document.body.removeAttribute("data-menu");
+        document.body.removeAttribute("data-col");
+       document.body.setAttribute("class","pace-done fixed-navbar vertical-menu 2-columns vertical-layout pace-done menu-expanded pace-done");
         // document.body.appendChild(script);
     }
 
@@ -55,11 +58,11 @@ class Index extends Component{
     render(){
         return(
             <div>
-                <button value="clickME" style={{width:"100%",height:150}} onClick={()=>this.props.history.replace("/Login")}></button>
+                <button value="clickME" style={{width:"100%",height:150}} onClick={()=>this.props.history.replace(LoginPath)}></button>
                 <NavBar ></NavBar>
                 <div className="routeContainer">
                     <Switch>
-                        <Route path="/" exact={true} component={ContentIndexPage}></Route>
+                        <Route path={ContentPagePath} exact={true} component={ContentIndexPage}></Route>
                     </Switch>
                 </div>
                 <SideBar></SideBar>

@@ -11,11 +11,11 @@ class SideBar extends Component{
                 <div className="main-menu-content">
                     <ul id="main-menu-navigation" data-menu="menu-navigation" className="navigation navigation-main">
                         <li className=" nav-item">
-                            <Link to="#">
+                            <a href="#">
                                 <i className="icon-home3"></i>
                                 <span data-i18n="nav.dash.main" className="menu-title">Dashboard</span>
                                 <span className="tag tag tag-primary tag-pill float-xs-right mr-2">2</span>
-                            </Link>
+                            </a>
                             <ul className="menu-content">
                                 <li className="active">
                                     <Link to="/" data-i18n="nav.dash.main" className="active">Dashboard</Link>

@@ -1,9 +1,10 @@
 import React ,{Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link,Redirect} from 'react-router-dom';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {validationAction} from './../../../redux/actions/actionTypes';
 import {RecoverFormInputPath} from './../../constFile/pathRouteNames';
+import {IndexPath} from './../../constFile/pathRouteNames';
 
 class LoginFormInput extends Component{
     constructor(props){
@@ -24,14 +25,30 @@ class LoginFormInput extends Component{
                 errorMsg:'Username & Password is required'
             });
         }else{
-          let response = await  axios.post('http://localhost:53094/api/userapi/Login',{
-                nationalCode: this.props.data.nationalCode,
-                password: this.props.data.password
-            });
-            if(response.status==200){
-
-            }else{
-
+            try {
+                let response = await  axios.post('http://localhost:53094/api/userapi/Login',{
+                    nationalCode: this.props.data.nationalCode,
+                    password: this.props.data.password
+                });
+                
+                if(response.status==200){
+                    var data = response.data;
+                    
+                    if(data.isError === true)
+                    {
+                        this.setState({
+                            errorMsg:data.Errors.Message
+                        })
+                    }else{
+                        this.props.history.push("/")
+                    }
+                }else{
+                    
+                }
+            } catch (error) {
+                this.setState({
+                            errorMsg:"Server Is Down!"
+                })
             }
         }
     }
