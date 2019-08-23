@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {validationAction} from './../../../redux/actions/actionTypes';
+import {RecoverFormInputPath} from './../../constFile/pathRouteNames';
 
 class LoginFormInput extends Component{
     constructor(props){
@@ -17,25 +18,21 @@ class LoginFormInput extends Component{
         
     }
 
-      Login(){
-        if(this.props.data.nationalCode===""|| this.props.data.password===""){
+     async Login(){
+         if(this.props.data.nationalCode===""|| this.props.data.password===""){
             this.setState({
                 errorMsg:'Username & Password is required'
             });
         }else{
-            axios.post('http://localhost:53094/api/userapi/Login',{
-                nationalCode: "2860122281",
-                password: "123456"
-            },
-            {
-                headers: { 
-                    "Accept": "application/json " ,
-                     "Content-Type":"application/json"}
-            }).then(function (response){
-                console.log(response);
-            }).catch(function(error){
-                console.log(error);
-            })
+          let response = await  axios.post('http://localhost:53094/api/userapi/Login',{
+                nationalCode: this.props.data.nationalCode,
+                password: this.props.data.password
+            });
+            if(response.status==200){
+
+            }else{
+
+            }
         }
     }
 
@@ -68,7 +65,7 @@ class LoginFormInput extends Component{
                                 </fieldset>
                             </div>
                             <div className="col-md-6 col-xs-12 text-xs-center text-md-right">
-                                <Link to="/Recover" className="card-link">Forgot Password?</Link>
+                                <Link to={RecoverFormInputPath} className="card-link">Forgot Password?</Link>
                             </div>
                         </fieldset>
                         <button type="button" className="btn btn-primary btn-lg btn-block" onClick={this.Login.bind(this)}>

@@ -1,5 +1,7 @@
 import React,{Component} from 'react';
 import Login from './Login/Login';
+import {Redirect} from 'react-router-dom';
+import {LoginPath} from './../constFile/pathRouteNames';
 
 export default class App extends Component{
     constructor(props){
@@ -9,7 +11,7 @@ export default class App extends Component{
 
     render(){
         return(
-            <Login></Login>
+            <Redirect to={LoginPath}></Redirect>
         )
 
     }

@@ -1,5 +1,6 @@
 import React ,{Component} from 'react';
 import {Link} from 'react-router-dom';
+import {LoginPath} from './../../constFile/pathRouteNames';
 export default class RecoverPassword extends Component{
     render(){
         return(
@@ -16,7 +17,7 @@ export default class RecoverPassword extends Component{
                 </form>
             </div>
             <p className="text-xs-center">Back To Login : 
-                <Link to="/" className="card-link">Login</Link>
+                <Link to={LoginPath} className="card-link">Login</Link>
             </p>
         </div>
         )

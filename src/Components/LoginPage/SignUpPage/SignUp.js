@@ -1,5 +1,6 @@
 import React ,{Component} from 'react';
 import {Link} from 'react-router-dom';
+import {LoginPath} from './../../constFile/pathRouteNames';
 
 export default class SigntUP extends Component{
     render(){
@@ -31,7 +32,7 @@ export default class SigntUP extends Component{
                 </form>
             </div>
             <p className="text-xs-center">Already have an account ? 
-                <Link to="/" className="card-link">Login</Link>
+                <Link to={LoginPath} className="card-link">Login</Link>
             </p>
         </div>
         )

@@ -6,6 +6,7 @@ import CardTitle from '../CardTitle';
 import CardFooter from '../CardFooter';
 import {Route,Switch} from 'react-router-dom';
 import SignUpPage from './../SignUpPage/SignUp';
+import {LoginFormInputPath,RecoverFormInputPath,SignUpFormInputPath, LoginPath} from './../../constFile/pathRouteNames';
 
 class Login extends Component{
     constructor(props){
@@ -37,9 +38,9 @@ class Login extends Component{
                                     <CardTitle></CardTitle>
                                     <div className="routeContainer">
                                         <Switch>
-                                            <Route path="/" exact={true} component={LoginFormInput}></Route>
-                                            <Route path="/Recover"  component={RecoverPassword}></Route>
-                                            <Route path="/SignUP"  component={SignUpPage}></Route>
+                                            <Route path={LoginPath} exact={true} component={LoginFormInput}></Route>
+                                            <Route path={RecoverFormInputPath} component={RecoverPassword}></Route>
+                                            <Route path={SignUpFormInputPath}  component={SignUpPage}></Route>
                                         </Switch>
                                     </div>
                                     

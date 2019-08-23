@@ -1,6 +1,8 @@
 import React,{Component} from 'react';
 import Index from './IndexComponents/index';
 import Authentication from './LoginPage/Authentication';
+import MainRoute from './MainRoute';
+
 export default class App extends Component{
     constructor(props){
         super(props);
@@ -8,15 +10,20 @@ export default class App extends Component{
 
 
     render(){
-        if(this.props.isLogin===true){
+        if(this.props.isLogin===false){
             return(
-                <Index></Index>
+                <div>
+                    <MainRoute></MainRoute>
+                    <Index></Index>
+                </div>
             )
         }else{
             return(
-                <Authentication></Authentication>
+                <div>
+                    <MainRoute></MainRoute>
+                    <Authentication></Authentication>
+                </div>
             )
         }
-
     }
 }
