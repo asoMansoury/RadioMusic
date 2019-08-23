@@ -3,8 +3,9 @@ import './linkFiles';
 import NavBar from './Navbar';
 import SideBar from './SideBar';
 import ContentIndexPage from './ContentIndexPage';
-import {Route,Switch} from 'react-router-dom';
+import {Route,Switch,Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {LoginPath} from './../constFile/pathRouteNames';
 import {testAction} from './../../redux/actions/actionTypes';
 
 class Index extends Component{
@@ -54,9 +55,7 @@ class Index extends Component{
     render(){
         return(
             <div>
-                <button value="clickME" style={{width:"100%",height:150}} onClick={()=>{
-                           this.props.setTrue();
-                }}></button>
+                <button value="clickME" style={{width:"100%",height:150}} onClick={()=>this.props.history.replace("/Login")}></button>
                 <NavBar ></NavBar>
                 <div className="routeContainer">
                     <Switch>

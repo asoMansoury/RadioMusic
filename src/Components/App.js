@@ -10,17 +10,15 @@ export default class App extends Component{
 
 
     render(){
-        if(this.props.isLogin===false){
+        if(this.props.isLogin===true){
             return(
                 <div>
-                    <MainRoute></MainRoute>
                     <Index></Index>
                 </div>
             )
         }else{
             return(
                 <div>
-                    <MainRoute></MainRoute>
                     <Authentication></Authentication>
                 </div>
             )
