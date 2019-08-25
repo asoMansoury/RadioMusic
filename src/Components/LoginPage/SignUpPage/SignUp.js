@@ -86,7 +86,7 @@ import axios from 'axios';
                         </div>
                         <span style={{color: "red"}}>{this.props.data.errors["password"]}</span>
                     </fieldset>
-                    <button type="submit" className="btn btn-primary btn-lg btn-block" onClick={()=>this.handleChange.bind(this)}>
+                    <button type="button" className="btn btn-primary btn-lg btn-block" onClick={()=>this.handleChange.bind(this)}>
                         <i className="icon-unlock2"></i> Register
                     </button>
                 </form>
