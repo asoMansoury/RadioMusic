@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {LoginPath} from './../../constFile/pathRouteNames';
 import {connect} from 'react-redux';
 import {validationAction,userLogin} from './../../../redux/actions/actionTypes';
+import axios from 'axios';
 
  class SigntUP extends Component{
      constructor(props){
