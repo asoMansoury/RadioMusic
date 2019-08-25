@@ -21,7 +21,7 @@ import {validationAction,userLogin} from './../../../redux/actions/actionTypes';
         this.props.handleValidationFunc(e.target); 
     }
 
-    handleSubmit(){
+    async  handleSubmit(){
         if(this.props.data.userName===""|| this.props.data.password===""||this.props.data.userEmail===""){
             this.setState({
                 errorMsg:'Please Required neccessary fields'
@@ -85,7 +85,7 @@ import {validationAction,userLogin} from './../../../redux/actions/actionTypes';
                         </div>
                         <span style={{color: "red"}}>{this.props.data.errors["password"]}</span>
                     </fieldset>
-                    <button type="submit" className="btn btn-primary btn-lg btn-block">
+                    <button type="submit" className="btn btn-primary btn-lg btn-block" onClick={()=>this.handleChange.bind(this)}>
                         <i className="icon-unlock2"></i> Register
                     </button>
                 </form>
