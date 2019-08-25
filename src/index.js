@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+import App from './Components/App';
 import {BrowserRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
-import MainRoute from './components/MainRoute';
+import MainRoute from './Components/MainRoute';
 import {store,persistor} from './redux/store';
 import {PersistGate} from 'redux-persist/integration/react';
-import Index from './components/IndexComponents/index';
+import Index from './Components/IndexComponents/index';
 // const store = createStore(reducers);
 
 ReactDOM.render(
