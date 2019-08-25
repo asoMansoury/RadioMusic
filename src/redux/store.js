@@ -9,7 +9,7 @@ import {createLogger} from 'redux-logger';
 const persistConfig = {
     key:'root',
     storage,
-    blacklist: ['vlaidationReducer']
+    blacklist: ['validationReducer']
 }
 
 const persistReducerConfig = persistReducer(persistConfig,rootReducer);

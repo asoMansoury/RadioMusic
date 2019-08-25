@@ -2,11 +2,13 @@ import {Validation} from './../constActions';
 
 
 let initValue ={
-    nationalCode:'',
+    userName:'',
     password:'',
+    userEmail:'',
     errors:{
-        nationalCode:'',
-        password:''
+        userName:'',
+        password:'',
+        userEmail:''
     },
     errorMsg:'',
     isValidForm:false
@@ -17,12 +19,10 @@ export const validationReducer =(state=initValue, action)=>{
         case Validation:
             let targetID = action.target.id.toString();
             let targetValue = action.target.value.toString();
-            let errors = {};
             if(targetValue==="")
                 state.errors[targetID] = "Cannot be empty"
             else
                 state.errors[targetID] = "";
-            
             return {
                 ...state,
                 [targetID]:targetValue,

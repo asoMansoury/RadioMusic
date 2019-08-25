@@ -15,7 +15,6 @@ class LoginFormInput extends Component{
     }
 
     componentDidMount(){
-        console.log(this.props);
         if(this.props.userStatus.isLogin===true){
             this.props.history.push("/")
         }
@@ -23,18 +22,17 @@ class LoginFormInput extends Component{
 
     handleChange = (e)=>{
         this.props.handleValidationFunc(e.target);
-        
     }
 
      async Login(){
-         if(this.props.data.nationalCode===""|| this.props.data.password===""){
+         if(this.props.data.userName===""|| this.props.data.password===""){
             this.setState({
                 errorMsg:'Username & Password is required'
             });
         }else{
             try {
                 let response = await  axios.post('http://localhost:53094/api/userapi/Login',{
-                    nationalCode: this.props.data.nationalCode,
+                    userName: this.props.data.nationalCode,
                     password: this.props.data.password
                 });
                 
@@ -71,14 +69,14 @@ class LoginFormInput extends Component{
                 <div className="card-block">
                     <form className="form-horizontal form-simple" action="index.html" novalidate>
                         <fieldset className="form-group position-relative has-icon-left mb-0">
-                            <input type="text" value={this.props.nationalCode} onChange={e=>this.handleChange(e)} className="form-control form-control-lg input-lg" id="nationalCode" placeholder="Your Username" ></input>
+                            <input type="text" value={this.props.userName} onChange={e=>this.handleChange(e)} className="form-control form-control-lg input-lg" id="userName" placeholder="Your Username" required></input>
                             <div className="form-control-position">
                                 <i className="icon-head"></i>
                             </div>
-                            <span style={{color: "red"}}>{this.props.data.errors["nationalCode"]}</span>
+                            <span style={{color: "red"}}>{this.props.data.errors["userName"]}</span>
                         </fieldset>
                         <fieldset className="form-group position-relative has-icon-left">
-                            <input type="password" value={this.props.password} onChange={e=>this.handleChange(e)} className="form-control form-control-lg input-lg" id="password" placeholder="Enter Password"></input>
+                            <input type="password" value={this.props.password} onChange={e=>this.handleChange(e)} className="form-control form-control-lg input-lg" id="password" placeholder="Enter Password" required></input>
                                 <div className="form-control-position">
                                     <i className="icon-key3"></i>
                                 </div>
