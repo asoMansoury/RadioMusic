@@ -22,17 +22,21 @@ import axios from 'axios';
         this.props.handleValidationFunc(e.target); 
     }
 
-    async  handleSubmit(){
+     async handleSubmit(){
         if(this.props.data.userName===""|| this.props.data.password===""||this.props.data.userEmail===""){
             this.setState({
                 errorMsg:'Please Required neccessary fields'
             });
         }else{
             try {
-                let response = await  axios.post('http://localhost:53094/api/userapi/Login',{
-                    userName: this.props.data.nationalCode,
-                    password: this.props.data.password
-                });
+                let formData = new FormData();
+                let inputData = {
+                    userName: this.props.data.userName,
+                    password: this.props.data.password,
+                    email:this.props.userEmail
+                }
+                formData.append('FormData',JSON.stringify(inputData));
+                let response = await axios.post('http://localhost:53094/api/userapi/RegisterUser',formData);
                 
                 if(response.status==200){
                     var data = response.data;
@@ -86,9 +90,10 @@ import axios from 'axios';
                         </div>
                         <span style={{color: "red"}}>{this.props.data.errors["password"]}</span>
                     </fieldset>
-                    <button type="submit" className="btn btn-primary btn-lg btn-block" onClick={()=>this.handleChange.bind(this)}>
+                    <button type="button" className="btn btn-primary btn-lg btn-block" onClick={this.handleSubmit.bind(this)}>
                         <i className="icon-unlock2"></i> Register
                     </button>
+                    <span style={{color: "red"}}>{this.state.errorMsg}</span>
                 </form>
             </div>
             <p className="text-xs-center">Already have an account ? 

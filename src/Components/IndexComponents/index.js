@@ -3,10 +3,10 @@ import './linkFiles';
 import NavBar from './Navbar';
 import SideBar from './SideBar';
 import ContentIndexPage from './ContentIndexPage';
-import {Route,Switch,Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {LoginPath,ContentPagePath} from './../constFile/pathRouteNames';
-import {testAction} from './../../redux/actions/actionTypes';
+import ManageRoles from './Roles/ManageRoles';
+import {Route,Link} from 'react-router-dom';
+import {LoginPath,ContentPagePath,ManageRolesPath, IndexPath} from './../constFile/pathRouteNames';
 
 class Index extends Component{
     constructor(props){
@@ -19,6 +19,7 @@ class Index extends Component{
         if(this.props.userStatus.isLogin===false){
             this.props.history.push(LoginPath);
         }
+        
         // if(this.props.isLogin===false){
         //     this.loadScripts("./assets/app-assets/js/core/libraries/jquery.min.js");
         //     this.loadScripts("./assets/app-assets/vendors/js/ui/tether.min.js");
@@ -61,13 +62,15 @@ class Index extends Component{
     render(){
         return(
             <div>
-                <button value="clickME" style={{width:"100%",height:150}} onClick={()=>this.props.history.replace(LoginPath)}></button>
                 <NavBar ></NavBar>
                 <div className="routeContainer">
-                    <Switch>
-                        <Route path={ContentPagePath} exact={true} component={ContentIndexPage}></Route>
-                    </Switch>
-                </div>
+                        <Route path={`${this.props.match.path}`} exact={true}   component={ContentIndexPage}></Route>
+                        <Route path={`${this.props.match.path}${ContentPagePath}`}   component={ContentIndexPage}></Route>
+                        <Route path={`${this.props.match.path}${ManageRolesPath}`}   component={ManageRoles}></Route>
+                        
+                    {/* <ContentIndexPage></ContentIndexPage> */}
+                </div>  
+                
                 <SideBar></SideBar>
                 
                 <footer className="footer footer-static footer-light navbar-border">

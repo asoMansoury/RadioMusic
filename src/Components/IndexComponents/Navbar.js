@@ -25,7 +25,7 @@ class NavBar extends Component{
 					</a>
 				</li>
 				<li className="nav-item">
-					<Link to="index.html" className="navbar-brand nav-link">
+					<Link to="/s" className="navbar-brand nav-link">
 						<img id="imgLogo" alt="branding logo"  src="./../../assets/app-assets/images/logo/robust-logo-light.png"
 						 data-expand="./../../assets/app-assets/images/logo/robust-logo-light.png" 
 						 data-collapse="./../../assets/app-assets/images/logo/robust-logo-small.png" 

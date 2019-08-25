@@ -18,7 +18,7 @@ class SideBar extends Component{
                             </a>
                             <ul className="menu-content">
                                 <li className="active">
-                                    <Link to="/" data-i18n="nav.dash.main" className="active">Dashboard</Link>
+                                    <Link to="/s" data-i18n="nav.dash.main" className="active">Dashboard</Link>
                                     {/* <Link to="index.html" data-i18n="nav.dash.main" className="menu-item">Dashboard</Link> */}
                                 </li>
                                 <li>

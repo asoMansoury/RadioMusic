@@ -15,9 +15,9 @@ class LoginFormInput extends Component{
     }
 
     componentDidMount(){
-        if(this.props.userStatus.isLogin===true){
-            this.props.history.push("/")
-        }
+        // if(this.props.userStatus.isLogin===true){
+        //     this.props.history.push("/")
+        // }
     }
 
     handleChange = (e)=>{
@@ -32,7 +32,7 @@ class LoginFormInput extends Component{
         }else{
             try {
                 let response = await  axios.post('http://localhost:53094/api/userapi/Login',{
-                    userName: this.props.data.nationalCode,
+                    userName: this.props.data.userName,
                     password: this.props.data.password
                 });
                 
