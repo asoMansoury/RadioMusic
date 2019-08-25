@@ -64,9 +64,8 @@ class Index extends Component{
             <div>
                 <NavBar ></NavBar>
                 <div className="routeContainer">
-                        <Route path={`${this.props.match.path}`} exact={true}   component={ContentIndexPage}></Route>
-                        <Route path={`${this.props.match.path}${ContentPagePath}`}   component={ContentIndexPage}></Route>
-                        <Route path={`${this.props.match.path}${ManageRolesPath}`}   component={ManageRoles}></Route>
+                        <Route path={`${this.props.match.path}`} exact={true}   component={ContentIndexPage} ></Route>
+                        <Route path={`${this.props.match.path}${ManageRolesPath}`}   component={ManageRoles} ></Route>
                         
                     {/* <ContentIndexPage></ContentIndexPage> */}
                 </div>  
