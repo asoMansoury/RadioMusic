@@ -15,7 +15,6 @@ class Index extends Component{
         this.loadScripts = this.loadScripts.bind(this);
         let baseUrl = window.location.origin;
         this.loadScripts(baseUrl+"/assets/app-assets/js/core/libraries/jquery.min.js");
-        this.loadScripts(baseUrl+"/assets/app-assets/vendors/js/ui/tether.min.js");
         this.loadScripts(baseUrl+"/assets/app-assets/vendors/js/ui/perfect-scrollbar.jquery.min.js");
         this.loadScripts(baseUrl+"/assets/app-assets/vendors/js/ui/unison.min.js");
         this.loadScripts(baseUrl+"/assets/app-assets/vendors/js/ui/screenfull.min.js");
@@ -30,6 +29,7 @@ class Index extends Component{
         if(this.props.userStatus.isLogin===false){
             this.props.history.push(LoginPath);
         }
+        this.loadScripts(baseUrl+"/assets/app-assets/vendors/js/ui/tether.min.js");
         this.loadScripts(baseUrl+"/assets/app-assets/js/core/libraries/bootstrap.min.js");
         this.loadScripts(baseUrl+"/assets/app-assets/vendors/js/ui/blockUI.min.js");
         this.loadScripts(baseUrl+"/assets/app-assets/vendors/js/ui/jquery.matchHeight-min.js");
@@ -61,7 +61,7 @@ class Index extends Component{
                 <NavBar ></NavBar>
                 <div className="routeContainer">
                         <Route path={`${this.props.match.path}`} exact={true}   component={ContentIndexPage} ></Route>
-                        <Route path={`${this.props.match.path}${IndexPath}`}   component={ContentIndexPage} ></Route>
+                        <Route path={`${this.props.match.path}${IndexPath}`} exact={true}  component={ContentIndexPage} ></Route>
                         <Route path={`${this.props.match.path}${ManageRolesPath}`}   component={ManageRoles} ></Route>                    
                 </div>  
                 

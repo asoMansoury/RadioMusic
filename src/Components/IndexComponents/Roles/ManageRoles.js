@@ -4,36 +4,13 @@ const baseUrl = window.location.origin;
 export default class ManageRoles extends Component{
 	constructor(props){
 		super(props);
-        this.loadScripts(baseUrl+"/assets/app-assets/js/core/libraries/jquery.min.js");
-        this.loadScripts(baseUrl+"/assets/app-assets/vendors/js/ui/tether.min.js");
-        this.loadScripts(baseUrl+"/assets/app-assets/vendors/js/ui/perfect-scrollbar.jquery.min.js");
-        this.loadScripts(baseUrl+"/assets/app-assets/vendors/js/ui/unison.min.js");
-        this.loadScripts(baseUrl+"/assets/app-assets/vendors/js/ui/screenfull.min.js");
-        this.loadScripts(baseUrl+"/assets/app-assets/vendors/js/extensions/pace.min.js");
+
 	}
 
 	componentDidMount(){
-		this.loadScripts(baseUrl+"/assets/app-assets/js/core/libraries/bootstrap.min.js");
-        this.loadScripts(baseUrl+"/assets/app-assets/vendors/js/ui/blockUI.min.js");
-        this.loadScripts(baseUrl+"/assets/app-assets/vendors/js/ui/jquery.matchHeight-min.js");
-        this.loadScripts(baseUrl+"/assets/app-assets/vendors/js/charts/chart.min.js");
-        this.loadScripts(baseUrl+"/assets/app-assets/js/core/app-menu.js");
-        this.loadScripts(baseUrl+"/assets/app-assets/js/core/app.js");
-		this.loadScripts(baseUrl+"/assets/app-assets/js/scripts/pages/dashboard-lite.js");
-		document.body.removeAttribute("data-open");
-        document.body.removeAttribute("data-menu");
-        document.body.removeAttribute("data-col");
-        document.body.setAttribute("class","pace-done fixed-navbar vertical-menu 2-columns vertical-layout pace-done menu-expanded pace-done");
+		
 	}
 
-	loadScripts(url){
-        const script = document.createElement("script");
-        script.src=url;
-        script.async = true;
-
-        document.body.appendChild(script);
-        
-    }
     render(){
         return(
         <div>
