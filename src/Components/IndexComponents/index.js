@@ -3,57 +3,54 @@ import './linkFiles';
 import NavBar from './Navbar';
 import SideBar from './SideBar';
 import ContentIndexPage from './ContentIndexPage';
-import {Route,Switch,Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {LoginPath,ContentPagePath} from './../constFile/pathRouteNames';
-import {testAction} from './../../redux/actions/actionTypes';
+import ManageRoles from './Roles/ManageRoles';
+import {Route,Link} from 'react-router-dom';
+import {LoginPath,ContentPagePath,ManageRolesPath, IndexPath} from './../constFile/pathRouteNames';
+import { variableDeclaration } from '@babel/types';
 
 class Index extends Component{
     constructor(props){
         super(props);
         this.loadScripts = this.loadScripts.bind(this);
+        let baseUrl = window.location.origin;
+        this.loadScripts(baseUrl+"/assets/app-assets/js/core/libraries/jquery.min.js");
+        this.loadScripts(baseUrl+"/assets/app-assets/vendors/js/ui/tether.min.js");
+        this.loadScripts(baseUrl+"/assets/app-assets/vendors/js/ui/perfect-scrollbar.jquery.min.js");
+        this.loadScripts(baseUrl+"/assets/app-assets/vendors/js/ui/unison.min.js");
+        this.loadScripts(baseUrl+"/assets/app-assets/vendors/js/ui/screenfull.min.js");
+        this.loadScripts(baseUrl+"/assets/app-assets/vendors/js/extensions/pace.min.js");
+
+
+
     }
 
     componentDidMount () {
-        this.loadScripts();
+        let baseUrl = window.location.origin;
         if(this.props.userStatus.isLogin===false){
             this.props.history.push(LoginPath);
         }
-        // if(this.props.isLogin===false){
-        //     this.loadScripts("./assets/app-assets/js/core/libraries/jquery.min.js");
-        //     this.loadScripts("./assets/app-assets/vendors/js/ui/tether.min.js");
-        //     this.loadScripts("./assets/app-assets/js/core/libraries/bootstrap.min.js");
-        //     this.loadScripts("./assets/app-assets/vendors/js/ui/perfect-scrollbar.jquery.min.js");
-        //     this.loadScripts("./assets/app-assets/vendors/js/ui/unison.min.js");
-        //     this.loadScripts("./assets/app-assets/vendors/js/ui/blockUI.min.js");
-        //     this.loadScripts("./assets/app-assets/vendors/js/ui/jquery.matchHeight-min.js");
-        //     this.loadScripts("./assets/app-assets/vendors/js/ui/screenfull.min.js");
-        //     this.loadScripts("./assets/app-assets/vendors/js/extensions/pace.min.js");
-        //     this.loadScripts("./assets/app-assets/vendors/js/charts/chart.min.js");
-        //     this.loadScripts("./assets/app-assets/js/core/app-menu.js");
-        //     this.loadScripts("./assets/app-assets/js/core/app.js");
-        //     this.loadScripts("./assets/app-assets/js/scripts/pages/dashboard-lite.js");
-        // }  else{
-        //     console.log(this.props.isLogin);
-        // }
+        this.loadScripts(baseUrl+"/assets/app-assets/js/core/libraries/bootstrap.min.js");
+        this.loadScripts(baseUrl+"/assets/app-assets/vendors/js/ui/blockUI.min.js");
+        this.loadScripts(baseUrl+"/assets/app-assets/vendors/js/ui/jquery.matchHeight-min.js");
+        this.loadScripts(baseUrl+"/assets/app-assets/vendors/js/charts/chart.min.js");
+        this.loadScripts(baseUrl+"/assets/app-assets/js/core/app-menu.js");
+        this.loadScripts(baseUrl+"/assets/app-assets/js/core/app.js");
+        this.loadScripts(baseUrl+"/assets/app-assets/js/scripts/pages/dashboard-lite.js");
 
-                // console.log("dispatch : ",this.props.dispatch({
-        //     type:"TEST"
-        // }));
-    }
-
-    loadScripts(){
-    //     const script = document.createElement("script");
-    //     script.src=url;
-    //     script.async = true;
-    //     var bodyTag =  document.getElementById("bodyApp");
-    //     // bodyTag.appendChild(script);
-    //    document.body.appendChild(script);
         document.body.removeAttribute("data-open");
         document.body.removeAttribute("data-menu");
         document.body.removeAttribute("data-col");
-       document.body.setAttribute("class","pace-done fixed-navbar vertical-menu 2-columns vertical-layout pace-done menu-expanded pace-done");
-        // document.body.appendChild(script);
+        document.body.setAttribute("class","pace-done fixed-navbar vertical-menu 2-columns vertical-layout pace-done menu-expanded pace-done");
+    }
+
+    loadScripts(url){
+        const script = document.createElement("script");
+        script.src=url;
+        script.async = true;
+
+        document.body.appendChild(script);
+
     }
 
 
@@ -61,13 +58,13 @@ class Index extends Component{
     render(){
         return(
             <div>
-                <button value="clickME" style={{width:"100%",height:150}} onClick={()=>this.props.history.replace(LoginPath)}></button>
                 <NavBar ></NavBar>
                 <div className="routeContainer">
-                    <Switch>
-                        <Route path={ContentPagePath} exact={true} component={ContentIndexPage}></Route>
-                    </Switch>
-                </div>
+                        <Route path={`${this.props.match.path}`} exact={true}   component={ContentIndexPage} ></Route>
+                        <Route path={`${this.props.match.path}${IndexPath}`}   component={ContentIndexPage} ></Route>
+                        <Route path={`${this.props.match.path}${ManageRolesPath}`}   component={ManageRoles} ></Route>                    
+                </div>  
+                
                 <SideBar></SideBar>
                 
                 <footer className="footer footer-static footer-light navbar-border">
