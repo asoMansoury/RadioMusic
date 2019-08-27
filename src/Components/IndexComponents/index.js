@@ -6,7 +6,8 @@ import ContentIndexPage from './ContentIndexPage';
 import {connect} from 'react-redux';
 import ManageRoles from './Roles/ManageRoles';
 import {Route,Link} from 'react-router-dom';
-import {LoginPath,ContentPagePath,ManageRolesPath, IndexPath} from './../constFile/pathRouteNames';
+import ManageUsers from './Users/ManageUsers';
+import {LoginPath,ManageUsersPath,ManageRolesPath, IndexPath} from './../constFile/pathRouteNames';
 import { variableDeclaration } from '@babel/types';
 
 class Index extends Component{
@@ -62,7 +63,8 @@ class Index extends Component{
                 <div className="routeContainer">
                         <Route path={`${this.props.match.path}`} exact={true}   component={ContentIndexPage} ></Route>
                         <Route path={`${this.props.match.path}${IndexPath}`} exact={true}  component={ContentIndexPage} ></Route>
-                        <Route path={`${this.props.match.path}${ManageRolesPath}`}   component={ManageRoles} ></Route>                    
+                        <Route path={`${this.props.match.path}${ManageRolesPath}`} exact={true}   component={ManageRoles} ></Route>                    
+                        <Route path={`${this.props.match.path}${ManageUsersPath}`} exact={true}   component={ManageUsers} ></Route>                    
                 </div>  
                 
                 <SideBar></SideBar>

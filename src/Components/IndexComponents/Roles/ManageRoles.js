@@ -1,8 +1,8 @@
 import React,{Component} from 'react';
 import {ServerAddress} from './../../constFile/ApiConstFile';
 import axios from 'axios';
-import SelectedComponent from './selectedComponent';
-const baseUrl = window.location.origin;
+import SelectedComponent from './../CommonComponent/selectedComponent';
+
 
 
 export default class ManageRoles extends Component{
