@@ -10,15 +10,30 @@ export default class ManageRoles extends Component{
 		super(props);
 		this.state = {
 			Roles:[],
-			Services:[]
+			Services:[],
+			isEnableMerhodsDropDown:false
 		}
 		this.loadRoles.bind(this);
+		this.handleChangeService.bind(this);
 		this.loadRoles(ServerAddress+'/api/RolesApi/GetRoles');
 		this.loadServices(ServerAddress+"/api/ControllersApi/GetControllers");
 	}
 
 	componentDidMount(){
 		
+	}
+
+	handleChangeService(e){
+		if(e.target.value!=0)
+		{
+			this.setState({
+				isEnableMerhodsDropDown:true
+			})
+		}else{
+			this.setState({
+				isEnableMerhodsDropDown:false
+			})
+		}
 	}
 
 	async	loadRoles(url){
@@ -32,7 +47,6 @@ export default class ManageRoles extends Component{
 
  	async	loadServices(url){
 		let response = await  axios.get(url);
-		console.log(response.data)
 		this.setState({
 			Services:response.data
 		})
@@ -117,15 +131,43 @@ export default class ManageRoles extends Component{
 												</h4>
 												<div className="row">
 													<div className="col-md-6">
-														<SelectedComponent  data={this.state.Roles} titleSelected="Choise Roles" titleLabel="Choise Roles"></SelectedComponent>
+														<SelectedComponent  data={this.state.Roles}  titleLabel="Choise Roles">
+															<select id="projectinput5" name="interested" className="form-control">
+																<option value="0" defaultValue="" disabled="">Choise Roles</option>
+																	{
+																		this.state.Roles.map(function(item,i){
+																			return <option value={item.Id}>{item.Name}</option>
+																		})
+																	}
+															</select>
+														</SelectedComponent>
 													</div>
 												</div>
 												<div className="row">
 													<div className="col-md-6">
-														<SelectedComponent data={this.state.Services} titleSelected="Choise Service" titleLabel="Choise Service"></SelectedComponent>
+														<SelectedComponent data={this.state.Services}   titleLabel="Choise Service">
+														<select id="projectinput5" name="interested" className="form-control" onChange={(event)=>this.handleChangeService(event)}>
+															<option value="0" defaultValue="" disabled="">Choise Service</option>
+																{
+																	this.state.Roles.map(function(item,i){
+																		return <option value={item.Id}>{item.Name}</option>
+																	})
+																}
+														</select>
+														</SelectedComponent>
 													</div>
 													<div className="col-md-6">
-													<	SelectedComponent data={this.state.Roles} titleSelected="Choise Roles" titleLabel="Choise Roles"></SelectedComponent>
+														
+													<SelectedComponent data={this.state.Roles}   titleLabel="Choise Methods">
+															<select id="projectinput5" name="interested" className="form-control" disabled={!this.state.isEnableMerhodsDropDown}>
+																<option value="0" defaultValue="" disabled="">Choise Methods</option>
+																{
+																	this.state.Roles.map(function(item,i){
+																		return <option value={item.Id}>{item.Name}</option>
+																	})
+																}
+															</select>
+													</SelectedComponent>
 													</div>
 												</div>
 											</div>
@@ -135,7 +177,7 @@ export default class ManageRoles extends Component{
 													
 																
 												</button>
-												<button type="submit" className="btn btn-primary">
+												<button type="button" className="btn btn-primary">
 													<i className="icon-check2"></i> Save
 													
 																
