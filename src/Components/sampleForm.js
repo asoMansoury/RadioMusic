@@ -1,40 +1,26 @@
 import React,{Component} from 'react';
 import {ServerAddress} from './../../constFile/ApiConstFile';
 import axios from 'axios';
-import SelectedComponent from './selectedComponent';
+import PropTypes  from 'prop-types';
 const baseUrl = window.location.origin;
-
-
-export default class ManageRoles extends Component{
+export default class sampleForm extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			Roles:[],
-			Services:[]
+			Roles:[]
 		}
 		this.loadRoles.bind(this);
-		this.loadRoles(ServerAddress+'/api/RolesApi/GetRoles');
-		this.loadServices(ServerAddress+"/api/ControllersApi/GetControllers");
+		this.loadRoles();
 	}
 
 	componentDidMount(){
 		
 	}
 
-	async	loadRoles(url){
-		let response = await  axios.get(url);
+ 	async	loadRoles(){
+		let response = await  axios.get(ServerAddress+'/api/RolesApi/GetRoles');
 		this.setState({
 			Roles:response.data
-		})
-		
-		return response.data;
-	}
-
- 	async	loadServices(url){
-		let response = await  axios.get(url);
-		console.log(response.data)
-		this.setState({
-			Services:response.data
 		})
 		
 		return response.data;
@@ -112,21 +98,82 @@ export default class ManageRoles extends Component{
 										<form className="form">
 											<div className="form-body">
 												<h4 className="form-section">
-													<i className="icon-clipboard4"></i> Requirements
-														
+													<i className="icon-head"></i> Personal Info
+										
 												</h4>
 												<div className="row">
 													<div className="col-md-6">
-														<SelectedComponent  data={this.state.Roles} titleSelected="Choise Roles" titleLabel="Choise Roles"></SelectedComponent>
+														<div className="form-group">
+															<label htmlFor="projectinput1">First Name</label>
+															<input type="text" id="projectinput1" className="form-control" placeholder="First Name" name="fname"></input>
+														</div>
+													</div>
+													<div className="col-md-6">
+														<div className="form-group">
+															<label htmlFor="projectinput2">Last Name</label>
+															<input type="text" id="projectinput2" className="form-control" placeholder="Last Name" name="lname"></input>
+														</div>
 													</div>
 												</div>
 												<div className="row">
 													<div className="col-md-6">
-														<SelectedComponent data={this.state.Services} titleSelected="Choise Service" titleLabel="Choise Service"></SelectedComponent>
+														<div className="form-group">
+															<label htmlFor="projectinput3">E-mail</label>
+															<input type="text" id="projectinput3" className="form-control" placeholder="E-mail" name="email"></input>
+														</div>
 													</div>
 													<div className="col-md-6">
-													<	SelectedComponent data={this.state.Roles} titleSelected="Choise Roles" titleLabel="Choise Roles"></SelectedComponent>
+														<div className="form-group">
+															<label htmlFor="projectinput4">Contact Number</label>
+															<input type="text" id="projectinput4" className="form-control" placeholder="Phone" name="phone"></input>
+														</div>
 													</div>
+												</div>
+												<h4 className="form-section">
+													<i className="icon-clipboard4"></i> Requirements
+														
+												</h4>
+												<div className="form-group">
+													<label htmlFor="companyName">Company</label>
+													<input type="text" id="companyName" className="form-control" placeholder="Company Name" name="company"></input>
+												</div>
+												<div className="row">
+													<div className="col-md-6">
+														<div className="form-group">
+															<label htmlFor="projectinput5">Interested in</label>
+															<select id="projectinput5" name="interested" className="form-control">
+																<option value="none" defaultValue="" disabled="">Interested in</option>
+																<option value="design">design</option>
+																<option value="development">development</option>
+																<option value="illustration">illustration</option>
+																<option value="branding">branding</option>
+																<option value="video">video</option>
+															</select>
+														</div>
+													</div>
+													<div className="col-md-6">
+														<div className="form-group">
+															<label htmlFor="projectinput6">Budget</label>
+															<select id="projectinput6" name="budget" className="form-control">
+																<option value="0" defaultValue="" disabled="">Budget</option>
+																<option value="less than 5000$">less than 5000$</option>
+																<option value="5000$ - 10000$">5000$ - 10000$</option>
+																<option value="10000$ - 20000$">10000$ - 20000$</option>
+																<option value="more than 20000$">more than 20000$</option>
+															</select>
+														</div>
+													</div>
+												</div>
+												<div className="form-group">
+													<label>Select File</label>
+													<label id="projectinput7" className="file center-block">
+														<input type="file" id="file"></input>
+														<span className="file-custom"></span>
+													</label>
+												</div>
+												<div className="form-group">
+													<label htmlFor="projectinput8">About Project</label>
+													<textarea id="projectinput8" rows="5" className="form-control" name="comment" placeholder="About Project"></textarea>
 												</div>
 											</div>
 											<div className="form-actions">
