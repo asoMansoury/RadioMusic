@@ -3,6 +3,8 @@ import * as firstSlide from './../../assets/app-assets/images/carousel/01.jpg';
 import * as secondSlide from './../../assets/app-assets/images/carousel/02.jpg';
 import * as thirdSlide from './../../assets/app-assets/images/carousel/01.jpg';
 import * as fifthSlide from './../../assets/app-assets/images/carousel/05.jpg';
+import CKEditor from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 class ContentIndexPage extends Component{
     render(){
@@ -88,23 +90,24 @@ class ContentIndexPage extends Component{
 							<div className="col-xl-8 col-lg-12">
 								<div className="card">
 									<div className="card-body">
-										<ul className="list-inline text-xs-center pt-2 m-0">
-											<li className="mr-1">
-												<h6>
-													<i className="icon-circle warning"></i>
-													<span className="grey darken-1">Remaining</span>
-												</h6>
-											</li>
-											<li className="mr-1">
-												<h6>
-													<i className="icon-circle success"></i>
-													<span className="grey darken-1">Completed</span>
-												</h6>
-											</li>
-										</ul>
-										<div className="chartjs height-250">
-											<canvas id="line-stacked-area" height="250"></canvas>
-										</div>
+									<CKEditor
+												editor={ ClassicEditor }
+												data="<p>Hello from CKEditor 5!</p>"
+												onInit={ editor => {
+													// You can store the "editor" and use when it is needed.
+													console.log( 'Editor is ready to use!', editor );
+												} }
+												onChange={ ( event, editor ) => {
+													const data = editor.getData();
+													console.log( { event, editor, data } );
+												} }
+												onBlur={ ( event, editor ) => {
+													console.log( 'Blur.', editor );
+												} }
+												onFocus={ ( event, editor ) => {
+													console.log( 'Focus.', editor );
+												} }>
+									</CKEditor>
 									</div>
 									<div className="card-footer">
 										<div className="row">
