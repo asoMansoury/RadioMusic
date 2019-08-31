@@ -5,8 +5,35 @@ import * as thirdSlide from './../../assets/app-assets/images/carousel/01.jpg';
 import * as fifthSlide from './../../assets/app-assets/images/carousel/05.jpg';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import CardComponent from './../CommonComponents/CardComponent';
 
 class ContentIndexPage extends Component{
+	constructor(props){
+		super(props);
+		this.renderFooterParent = this.renderFooterParent.bind(this);
+	}
+
+	renderFooterParent(){
+		return(
+			<div>
+				<div className="col-xs-3 text-xs-center">
+					<span className="text-muted">Total Task</span>
+					<h2 className="block font-weight-normal">125</h2>
+					<progress className="progress progress-xs mt-2 progress-success" value="40" max="100"></progress>
+				</div>
+				<div className="col-xs-3 text-xs-center">
+					<span className="text-muted">Completed Task</span>
+					<h2 className="block font-weight-normal">242</h2>
+					<progress className="progress progress-xs mt-2 progress-success" value="60" max="100"></progress>
+				</div>
+				<div className="col-xs-3 text-xs-center">
+					<span className="text-muted">Total Revenue</span>
+					<h2 className="block font-weight-normal">$11,582</h2>
+					<progress className="progress progress-xs mt-2 progress-success" value="90" max="100"></progress>
+				</div>
+			</div>
+		)
+	}
     render(){
         return(
             <div>
@@ -16,28 +43,20 @@ class ContentIndexPage extends Component{
 					<div className="content-body">
 						
 						<div className="row">
-							<div className="col-xl-3 col-lg-6 col-xs-12">
-								<div className="card">
-									<div className="card-body">
-										<div className="card-block">
-											<div className="media">
-												<div className="media-body text-xs-left">
-													<h3 className="pink">278</h3>
-													<span>New Projects</span>
-												</div>
-												<div className="media-right media-middle">
-													<i className="icon-bag2 pink font-large-2 float-xs-right"></i>
-												</div>
-											</div>
-										</div>
+							<CardComponent classNameprop={"col-xl-3 col-lg-6 col-xs-12"} renderFooter={null}>
+								<div className="media">
+									<div className="media-body text-xs-left">
+										<h3 className="pink">278</h3>
+										<span>New Projects</span>
+									</div>
+									<div className="media-right media-middle">
+										<i className="icon-bag2 pink font-large-2 float-xs-right"></i>
 									</div>
 								</div>
-							</div>
-							<div className="col-xl-3 col-lg-6 col-xs-12">
-								<div className="card">
-									<div className="card-body">
-										<div className="card-block">
-											<div className="media">
+							</CardComponent>
+
+							<CardComponent classNameprop={"col-xl-3 col-lg-6 col-xs-12"} renderFooter={null}>
+										<div className="media">
 												<div className="media-body text-xs-left">
 													<h3 className="teal">156</h3>
 													<span>New Clients</span>
@@ -46,95 +65,36 @@ class ContentIndexPage extends Component{
 													<i className="icon-user1 teal font-large-2 float-xs-right"></i>
 												</div>
 											</div>
+							</CardComponent>
+							
+							<CardComponent classNameprop={"col-xl-3 col-lg-6 col-xs-12"} renderFooter={null}>
+									<div className="media">
+										<div className="media-body text-xs-left">
+											<h3 className="deep-orange">64.89 %</h3>
+											<span>Conversion Rate</span>
+										</div>
+										<div className="media-right media-middle">
+											<i className="icon-diagram deep-orange font-large-2 float-xs-right"></i>
 										</div>
 									</div>
-								</div>
-							</div>
-							<div className="col-xl-3 col-lg-6 col-xs-12">
-								<div className="card">
-									<div className="card-body">
-										<div className="card-block">
-											<div className="media">
-												<div className="media-body text-xs-left">
-													<h3 className="deep-orange">64.89 %</h3>
-													<span>Conversion Rate</span>
-												</div>
-												<div className="media-right media-middle">
-													<i className="icon-diagram deep-orange font-large-2 float-xs-right"></i>
-												</div>
-											</div>
-										</div>
+							</CardComponent>
+							<CardComponent classNameprop={"col-xl-3 col-lg-6 col-xs-12"} renderFooter={null}>
+								<div className="media">
+									<div className="media-body text-xs-left">
+										<h3 className="cyan">423</h3>
+										<span>Support Tickets</span>
+									</div>
+									<div className="media-right media-middle">
+										<i className="icon-ios-help-outline cyan font-large-2 float-xs-right"></i>
 									</div>
 								</div>
-							</div>
-							<div className="col-xl-3 col-lg-6 col-xs-12">
-								<div className="card">
-									<div className="card-body">
-										<div className="card-block">
-											<div className="media">
-												<div className="media-body text-xs-left">
-													<h3 className="cyan">423</h3>
-													<span>Support Tickets</span>
-												</div>
-												<div className="media-right media-middle">
-													<i className="icon-ios-help-outline cyan font-large-2 float-xs-right"></i>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+							</CardComponent>
 						</div>
 						
 						<div className="row">
-							<div className="col-xl-8 col-lg-12">
-								<div className="card">
-									<div className="card-body">
-									<CKEditor
-												editor={ ClassicEditor }
-												data="<p>Hello from CKEditor 5!</p>"
-												onInit={ editor => {
-													// You can store the "editor" and use when it is needed.
-													console.log( 'Editor is ready to use!', editor );
-												} }
-												onChange={ ( event, editor ) => {
-													const data = editor.getData();
-													console.log( { event, editor, data } );
-												} }
-												onBlur={ ( event, editor ) => {
-													console.log( 'Blur.', editor );
-												} }
-												onFocus={ ( event, editor ) => {
-													console.log( 'Focus.', editor );
-												} }>
-									</CKEditor>
-									</div>
-									<div className="card-footer">
-										<div className="row">
-											<div className="col-xs-3 text-xs-center">
-												<span className="text-muted">Total Projects</span>
-												<h2 className="block font-weight-normal">18</h2>
-												<progress className="progress progress-xs mt-2 progress-success" value="70" max="100"></progress>
-											</div>
-											<div className="col-xs-3 text-xs-center">
-												<span className="text-muted">Total Task</span>
-												<h2 className="block font-weight-normal">125</h2>
-												<progress className="progress progress-xs mt-2 progress-success" value="40" max="100"></progress>
-											</div>
-											<div className="col-xs-3 text-xs-center">
-												<span className="text-muted">Completed Task</span>
-												<h2 className="block font-weight-normal">242</h2>
-												<progress className="progress progress-xs mt-2 progress-success" value="60" max="100"></progress>
-											</div>
-											<div className="col-xs-3 text-xs-center">
-												<span className="text-muted">Total Revenue</span>
-												<h2 className="block font-weight-normal">$11,582</h2>
-												<progress className="progress progress-xs mt-2 progress-success" value="90" max="100"></progress>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+						<CardComponent classNameprop={"col-xl-8 col-lg-12"} renderFooter={this.renderFooterParent()}>
+							
+						</CardComponent>
 							<div className="col-xl-4 col-lg-12">
 								<div className="card card-inverse bg-info">
 									<div className="card-body">
