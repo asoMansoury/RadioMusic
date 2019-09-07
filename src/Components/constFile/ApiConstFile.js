@@ -1,1 +1,1 @@
-export const ServerAddress = "http://localhost:53094/"
+export const ServerAddress = "http://novinroshd.ir:8044/"
