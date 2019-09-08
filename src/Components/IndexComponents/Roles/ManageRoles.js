@@ -172,11 +172,27 @@ export default class ManageRoles extends Component{
 														</select>
 														</SelectedComponent>
 													</div>
-													<div className="col-md-6">
-														
+												</div>
+												<div className="row dropDowns">
+													<div className="col-md-5">
 													<SelectedComponent data={this.state.Methods}   titleLabel="Choise Methods">
-															<select id="methodsSelect" name="interested" className="form-control" disabled={!this.state.isEnableMerhodsDropDown}>
-																<option value="0" defaultValue="" disabled="">Choise Methods</option>
+															<select id="methodsSelect" name="interested" className="form-control" multiple disabled={!this.state.isEnableMerhodsDropDown}>
+																{
+																	this.state.Methods.map(function(item,i){
+																		return <option value={item.ID}>{item.ActionName}</option>
+																	})
+																}
+															</select>
+													</SelectedComponent>
+													</div>
+													<div className="col-md-2 buttons">
+														<button type="button" className="btn btn-primary">
+															<i className="icon-check2"></i> Save																	
+														</button>
+													</div>
+													<div className="col-md-5">
+													<SelectedComponent data={this.state.Methods}   titleLabel="Choise Methods">
+															<select id="methodsSelect" name="interested" className="form-control" multiple disabled={!this.state.isEnableMerhodsDropDown}>
 																{
 																	this.state.Methods.map(function(item,i){
 																		return <option value={item.ID}>{item.ActionName}</option>

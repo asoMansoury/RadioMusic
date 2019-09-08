@@ -14,11 +14,8 @@ import "./../../assets/app-assets/vendors/css/extensions/pace.css";
 import "./../../assets/app-assets/css/bootstrap-extended.css";
 import "./../../assets/app-assets/css/app.css";
 import "./../../assets/app-assets/css/colors.css";
-
-
 import "./../../assets/app-assets/css/core/menu/menu-types/vertical-menu.css";
 import "./../../assets/app-assets/css/core/menu/menu-types/vertical-overlay-menu.css";
 import "./../../assets/app-assets/css/core/colors/palette-gradient.css";
-
 import "./../../assets/assets/css/style.css";
 

@@ -8,7 +8,6 @@ import ManageRoles from './Roles/ManageRoles';
 import {Route,Link} from 'react-router-dom';
 import ManageUsers from './Users/ManageUsers';
 import {LoginPath,ManageUsersPath,ManageRolesPath, IndexPath} from './../constFile/pathRouteNames';
-import { variableDeclaration } from '@babel/types';
 
 class Index extends Component{
     constructor(props){
