@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import './linkFiles';
+
 import NavBar from './Navbar';
 import SideBar from './SideBar';
 import ContentIndexPage from './ContentIndexPage';
@@ -22,6 +22,28 @@ class Index extends Component{
 
 
 
+    }
+
+    componentWillMount(){
+        let baseUrl = window.location.origin;
+        this.loadCss(baseUrl+"/assets/app-assets/images/ico/apple-icon-60.png");
+        this.loadCss(baseUrl+"/assets/app-assets/images/ico/apple-icon-76.png");
+        this.loadCss(baseUrl+"/assets/app-assets/images/ico/apple-icon-120.png");
+        this.loadCss(baseUrl+"/assets/app-assets/images/ico/apple-icon-152.png");
+        this.loadCss(baseUrl+"/assets/app-assets/images/ico/favicon.ico");
+        this.loadCss(baseUrl+"/assets/app-assets/images/ico/favicon-32.png");
+
+        this.loadCss(baseUrl+"/assets/app-assets/css/bootstrap.css");
+        this.loadCss(baseUrl+"/assets/app-assets/fonts/icomoon.css");
+        this.loadCss(baseUrl+"/assets/app-assets/fonts/flag-icon-css/css/flag-icon.min.css");
+        this.loadCss(baseUrl+"/assets/app-assets/vendors/css/extensions/pace.css");
+        this.loadCss(baseUrl+"/assets/app-assets/css/bootstrap-extended.css");
+        this.loadCss(baseUrl+"/assets/app-assets/css/app.css");
+        this.loadCss(baseUrl+"/assets/app-assets/css/colors.css");
+        this.loadCss(baseUrl+"/assets/app-assets/css/core/menu/menu-types/vertical-menu.css");
+        this.loadCss(baseUrl+"/assets/app-assets/css/core/menu/menu-types/vertical-overlay-menu.css");
+        this.loadCss(baseUrl+"/assets/app-assets/css/core/colors/palette-gradient.css");
+        this.loadCss(baseUrl+"/assets/assets/css/style.css");
     }
 
     componentDidMount () {
@@ -53,6 +75,14 @@ class Index extends Component{
 
     }
 
+    loadCss(url){
+        const sheet = document.createElement("link");
+        sheet.href = url;
+        sheet.async = true;
+        sheet.rel = 'stylesheet';
+        sheet.type = 'text/css';
+        document.head.appendChild(sheet);
+    }
 
 
     render(){

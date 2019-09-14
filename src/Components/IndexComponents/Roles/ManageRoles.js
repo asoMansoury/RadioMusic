@@ -1,8 +1,8 @@
 import React,{Component} from 'react';
-import {ServerAddress} from './../../constFile/ApiConstFile';
+import {ServerAddress,GetActions} from './../../constFile/ApiConstFile';
 import axios from 'axios';
 import SelectedComponent from './../CommonComponent/selectedComponent';
-
+import {containsObject, containsObjectById, containsObjectById2, containsObjectByValue} from './../../CommonComponents/Helper';
 
 
 export default class ManageRoles extends Component{
@@ -12,10 +12,13 @@ export default class ManageRoles extends Component{
 			Roles:[],
 			Services:[],
 			Methods:[],
+			SelectedMethods:[],
 			MethodID:0,
 			ServiceID:0,
 			isEnableMerhodsDropDown:false
 		}
+
+		this.arrayOfSelectedMethods = [];
 		this.loadRoles.bind(this);
 		this.handleChangeService.bind(this);
 		this.loadRoles(ServerAddress+'/api/RolesApi/GetRoles');
@@ -34,7 +37,7 @@ export default class ManageRoles extends Component{
 				isEnableMerhodsDropDown:true,
 				ServiceID:e.target.value
 			});
-			this.loadMethods(ServerAddress+"/api/ActionMethodsApi/GetActions?ID="+e.target.value);
+			this.loadMethods(ServerAddress+GetActions+"?ID="+e.target.value);
 		}else{
 			this.setState({
 				isEnableMerhodsDropDown:false
@@ -61,13 +64,92 @@ export default class ManageRoles extends Component{
 	}
 
 	async loadMethods(url){
-			let response = await  axios.get(url);
-			console.log(response);
-			this.setState({
-				Methods:response.data
-			})
+		let response = await  axios.get(url);
+		var data = [];
+
+		response.data.forEach(element => {
+			data.push(element);
+		});
+
+
+
+		var result = [];
+		data.forEach(element=>{
+			if(containsObjectById(element,this.state.SelectedMethods)==true){				
+			}else{
+				result.push(element);
+			}
+		});
+		this.setState({
+			Methods:result
+		})
+	}
+
+	getSelectedOptionsFromMethods(element){
+		var values = [];
+		var options = element.options;
+		for (let index = 0; index < options.length; index++) {
+			if(options[index].selected){
+				values.push(options[index]);
+			}
+		}
+		return values;
+	}
+	//#region set Selected Methods
+	removeFromStatewhenSelectedOption(){
+		var arrayMethods = [];
+		this.state.Methods.forEach(element=>{
+			if(containsObjectById(element,this.arrayOfSelectedMethods)==true){
+			}else{
+				arrayMethods.push(element);
+			}
+		});
+		this.setState({
+			Methods:arrayMethods
+		});
+
 		
 	}
+	setSelectedMethods(){
+		var values = this.getSelectedOptionsFromMethods(this.refs.ChoiseMethodsSelect);
+		values.forEach(element => {
+			if(containsObject(element,this.arrayOfSelectedMethods)==true){
+			}else{
+				this.arrayOfSelectedMethods.push({
+					Id:element.value,
+					name:element.text
+				});
+			}
+		});
+		this.setState({
+			SelectedMethods:this.arrayOfSelectedMethods
+		});
+		//set dropdown 2
+		this.removeFromStatewhenSelectedOption();
+	}
+	//#endregion
+
+
+	//#region remove from selected Methods
+	remFromSelectedMethods(){
+		var values = 	this.getSelectedOptionsFromMethods(this.refs.SelectedMethodsSelect);
+		var result = [];
+		this.state.SelectedMethods.forEach(element => {
+			if(containsObjectByValue(element,values)==true){
+				
+			}else{
+				result.push(element);
+			}
+		});
+
+		var serviceDrpDown = this.refs.serviceSelect;
+		this.loadMethods(ServerAddress+GetActions+"?ID="+serviceDrpDown.value);
+		this.setState({
+			SelectedMethods:result
+		})
+	}
+	//#endregion
+
 	renderDropDownItems(data){
 		return `<a className="dropdown-item" href="#">${data.Name}</a>`
 	}
@@ -161,7 +243,7 @@ export default class ManageRoles extends Component{
 												<div className="row">
 													<div className="col-md-6">
 														<SelectedComponent data={this.state.Services}   titleLabel="Choise Service">
-														<select id="serviceSelect" name="interested" className="form-control" onChange={(event)=>this.handleChangeService(event)}>
+														<select id="serviceSelect" ref="serviceSelect" name="interested" className="form-control" onChange={(event)=>this.handleChangeService(event)}>
 															<option value="0" defaultValue="" disabled="">Choise Service</option>
 																{
 
@@ -176,7 +258,7 @@ export default class ManageRoles extends Component{
 												<div className="row dropDowns">
 													<div className="col-md-5">
 													<SelectedComponent data={this.state.Methods}   titleLabel="Choise Methods">
-															<select id="methodsSelect" name="interested" className="form-control" multiple disabled={!this.state.isEnableMerhodsDropDown}>
+															<select ref="ChoiseMethodsSelect" id="ChoiseSelect" name="interested" className="form-control" multiple disabled={!this.state.isEnableMerhodsDropDown} style={{minHeight:200}}>
 																{
 																	this.state.Methods.map(function(item,i){
 																		return <option value={item.ID}>{item.ActionName}</option>
@@ -185,17 +267,24 @@ export default class ManageRoles extends Component{
 															</select>
 													</SelectedComponent>
 													</div>
-													<div className="col-md-2 buttons">
-														<button type="button" className="btn btn-primary">
-															<i className="icon-check2"></i> Save																	
-														</button>
+													<div className="col-md-1 buttons">
+														<div>
+															<button type="button"  style={{width:60,fontSize:10}} className="btn btn-sm btn-primary" onClick={this.setSelectedMethods.bind(this)}>
+																<i className="icon-check2"></i> Add 																
+															</button>
+														</div>
+														<div>
+															<button type="button" style={{width:60,fontSize:10}} className="btn btn-sm btn-danger mt-1" onClick={this.remFromSelectedMethods.bind(this)}>
+																<i className="icon-check2"></i> Remove																	
+															</button>
+														</div>
 													</div>
 													<div className="col-md-5">
-													<SelectedComponent data={this.state.Methods}   titleLabel="Choise Methods">
-															<select id="methodsSelect" name="interested" className="form-control" multiple disabled={!this.state.isEnableMerhodsDropDown}>
+													<SelectedComponent data={this.state.SelectedMethods}   titleLabel="Selected Methods">
+															<select ref="SelectedMethodsSelect" id="SelectedMethodsSelect" name="interested" className="form-control" multiple disabled={!this.state.isEnableMerhodsDropDown} style={{minHeight:200}}>
 																{
-																	this.state.Methods.map(function(item,i){
-																		return <option value={item.ID}>{item.ActionName}</option>
+																	this.state.SelectedMethods.map(function(item,i){
+																		return <option value={item.Id}>{item.name}</option>
 																	})
 																}
 															</select>
