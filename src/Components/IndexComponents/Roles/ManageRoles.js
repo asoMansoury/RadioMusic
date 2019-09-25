@@ -3,12 +3,15 @@ import {ServerAddress,GetActions} from './../../constFile/ApiConstFile';
 import axios from 'axios';
 import SelectedComponent from './../CommonComponent/selectedComponent';
 import {containsObject, containsObjectById, containsObjectById2, containsObjectByValue} from './../../CommonComponents/Helper';
+import $ from "jquery";
+import MultiSelectReact from 'multi-select-react';
 
 
 export default class ManageRoles extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
+			multiSelect: ["1"],
 			Roles:[],
 			Services:[],
 			Methods:[],
@@ -18,6 +21,7 @@ export default class ManageRoles extends Component{
 			isEnableMerhodsDropDown:false
 		}
 
+		
 		this.arrayOfSelectedMethods = [];
 		this.loadRoles.bind(this);
 		this.handleChangeService.bind(this);
@@ -26,8 +30,29 @@ export default class ManageRoles extends Component{
 		
 	}
 
+	loadScripts(url){
+        const script = document.createElement("script");
+        script.src=url;
+        script.async = true;
+
+        document.body.appendChild(script);
+
+	}
+	
+	loadCss(url){
+        const sheet = document.createElement("link");
+        sheet.href = url;
+        sheet.async = true;
+        sheet.rel = 'stylesheet';
+        sheet.type = 'text/css';
+        document.head.appendChild(sheet);
+	}
+	
+
 	componentDidMount(){
-		
+		$(document).ready(function() {
+			// $('.js-example-basic-multiple').select2()
+		})
 	}
 
 	handleChangeService(e){
@@ -155,6 +180,14 @@ export default class ManageRoles extends Component{
 	}
 
     render(){
+		const selectedOptionsStyles = {
+            color: "#3c763d",
+            backgroundColor: "#dff0d8"
+        };
+        const optionsListStyles = {
+            backgroundColor: "#dff0d8",
+            color: "#3c763d"
+        };
         return(
         <div className="app-content content container-fluid">
 			<div className="content-wrapper">
@@ -282,9 +315,11 @@ export default class ManageRoles extends Component{
 													<div className="col-md-5">
 													<SelectedComponent data={this.state.SelectedMethods}   titleLabel="Selected Methods">
 															<select ref="SelectedMethodsSelect" id="SelectedMethodsSelect" name="interested" className="form-control" multiple disabled={!this.state.isEnableMerhodsDropDown} style={{minHeight:200}}>
+															
 																{
+																	
 																	this.state.SelectedMethods.map(function(item,i){
-																		return <option value={item.Id}>{item.name}</option>
+																		return <option value={item.Id}>----{item.name}</option>
 																	})
 																}
 															</select>
@@ -292,6 +327,7 @@ export default class ManageRoles extends Component{
 													</div>
 												</div>
 											</div>
+											
 											<div className="form-actions">
 												<button type="button" className="btn btn-warning mr-1">
 													<i className="icon-cross2"></i> Cancel

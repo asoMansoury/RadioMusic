@@ -14,7 +14,8 @@ class Index extends Component{
         super(props);
         this.loadScripts = this.loadScripts.bind(this);
         let baseUrl = window.location.origin;
-        this.loadScripts(baseUrl+"/assets/app-assets/js/core/libraries/jquery.min.js");
+        // this.loadScripts(baseUrl+"/assets/app-assets/js/core/libraries/jquery.min.js");
+        this.loadScripts("http://code.jquery.com/jquery-1.11.1.min.js");
         this.loadScripts(baseUrl+"/assets/app-assets/vendors/js/ui/perfect-scrollbar.jquery.min.js");
         this.loadScripts(baseUrl+"/assets/app-assets/vendors/js/ui/unison.min.js");
         this.loadScripts(baseUrl+"/assets/app-assets/vendors/js/ui/screenfull.min.js");
